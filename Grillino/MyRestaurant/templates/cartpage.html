@@ -1,0 +1,52 @@
+{% extends 'binding.html' %}
+{% block title %}
+Cart
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid" style="margin-top:30px;">
+    <a href="/" class="btn btn-outline-dark">&#8592;Continue Shopping</a>
+    <hr>
+    <div class="row">
+        <div class="col-lg-4">
+            <h5>Items: {{ order.get_cart_items }}</h5>
+        </div>
+        <div class="col-lg-7">
+            <h5>Total: ${{ order.get_cart_total }}</h5>
+        </div>
+        <div class="col-lg-1">
+            <a href="{% url 'checkout' %}" class="btn btn-success text-white checkbtn">Checkout</a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="margin-top:20px;">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2"><strong>Name</strong></div>
+        <div class="col-lg-1"><strong>Price</strong></div>
+        <div class="col-lg-2"><strong>Quantity</strong></div>
+        <div class="col-lg-2"><strong>Total</strong></div>
+        <div class="col-lg-auto"></div>
+    </div>
+    <hr>
+    {% for item in items %}
+    <div class="row product-row">
+        <div class="col-lg-2"><img src="{{ item.product.Imageurl }}" style="height:120px;width:150px;" alt=""></div>
+        <div class="col-lg-2">{{ item.product.name }}</div>
+        <div class="col-lg-1">${{ item.product.selling_price }}</div>
+        <div class="col-lg-2">
+            <button type="button" style="color:blue;border:0;background-color:white;" class="update-cart" data-product="{{ item.product.id }}" data-action="add">+</button>&nbsp;&nbsp;
+            <input type="number" class="quantity-input" value="{{ item.quantity }}" min="1" style="width: 40px; text-align:center;">&nbsp;&nbsp;
+            <button style="color:blue;border:0;background-color:white;" class="update-cart" data-product="{{ item.product.id }}" data-action="remove"><strong>-</strong></button>
+        </div>
+        <div class="col-lg-2">${{ item.get_total }}</div>
+        <div class="col-lg-auto">
+            <button class="btn btn-danger update-cart" id="btnCart" data-product="{{ item.product.id }}" data-action="delete"><i class="fa fa-shopping-cart"></i> Remove</button>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+</div>
+
+{% endblock content %}

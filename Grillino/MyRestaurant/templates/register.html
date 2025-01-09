@@ -1,0 +1,72 @@
+{% extends "binding.html" %}
+{% load static %}
+{% block title %}
+Register
+{% endblock title %}
+{% block content %}
+<section>
+    <div class="container-fluid registractionform">
+        <div class="row row-cols-1 row-cols-lg-2 m-2 m-md-5">
+            <div class="col text-center">
+                <form onsubmit="return test()" method='POST'>
+                    {% csrf_token %}
+                    <h2>Register Here</h2>
+                  <div class="text-start ">
+                    <div>
+                        <label for="">First Name : </label><br>
+                        <input type="text" name='fname' id="name" placeholder="First Name">
+                        <span id="nameerroe"></span>
+                    </div>
+                    <div>
+                        <label for="">Last Name : </label><br>
+                        <input type="text" name='lname' id="name2" placeholder="Last Name">
+                        <span id="nameerroe2"></span>
+                    </div>
+                    <div>
+                        <label for="">Email : </label><br>
+                        <input type="text" name='email' id="email" placeholder="Email">
+                        <span id="emailerror"></span>
+                    </div>
+                    <div>
+                        <label for="">Phone : </label><br>
+                        <input type="text" name='phone' id="phone" placeholder="Phone Number">
+                        <span id="phoneerror"></span>
+                    </div>
+                    <div>
+                        <label for="">Password : </label><br>
+                        <input type="password" name='pass' id="password" placeholder="Password">
+                        <span id="passworderror"></span>
+                    </div>
+                     <div>
+                        <label for="">ConformPassword:</label><br>
+                        <input type="password" name="cpass" id="conformpassword" placeholder="Conformpassword">
+                        <span id="conformpassworderror"></span>
+                    </div><br>
+                    <div class="registerbutton">
+                        <button type="submit" class="regsubmit">Submit</button>
+                        <button type="button" class="regback mt-3 mt-md-0"><a href="login.html">Back</a></button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="col text-center  pt-5">
+                  <h2>Address</h2>
+                  <div>
+                      <span class="fs-3">Chennai</span>
+                      <p>T  - Nagar,</p>
+                      <p>Plot no. 140, 151,</p>
+                      <p>GST Road, Vallancheri,</p>
+                      <p>Chengalpattu District - 603 202, India</p>
+                      
+                      <div class="registersocialmedia">
+                        <a href=""><i class="fa-brands fa-twitter" style="color: #004cff;"></i></a>
+                        <a href=""><i class="fa-brands fa-whatsapp" style="color: #00b803;"></i></a>
+                        <a href=""><i class="fa-brands fa-facebook" style="color: #004cff;"></i></a>
+                        <a href=""><i class="fa-solid fa-phone" style="color: #00b803;"></i></a>         
+                      </div>      
+                  </div>
+              </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

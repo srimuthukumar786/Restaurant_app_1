@@ -1,0 +1,78 @@
+{% load static %}
+<div class="topheadding">
+    <div class="email">
+        <a></i>grillinoresort@gmail.com</a>
+    </div>
+    <div class="phone">
+        <a href="">call now :<i class="fa-solid fa-phone ps-2" style="color: #27b300;"></i>+91 0123456789</a>
+    </div>
+    <div class="topsocialmedia">
+        <a href=""><i class="fa-brands fa-whatsapp" ></i></a>
+        <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+        <a href=""><i class="fa-brands fa-instagram"></i></a>
+        <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+    </div>
+</div>
+
+<!-- Navbar -->
+
+<nav>
+    <div class="log">
+        <a href="#"><img src="{% static 'images/logo-white.svg' %}" alt=""></a>
+    </div>
+    <div class="searchbox">
+        <form action="{% url 'search' %}" method="POST">
+            {% csrf_token %}
+            <input type="search" name="keyword" style="background-color: white; color:black; border-radius:3px;" placeholder="Search here"> <button class="btn btn-outline-primary btn-sm">Search</button>
+        </form>           
+    </div>
+    <div>
+     
+            <input type="checkbox" id="navcheckbox">
+        <label for="navcheckbox">
+            <i class="fa-solid fa-bars" id="openmenu"></i>
+            <i class="fa-solid fa-xmark" id="cancelmenu"></i>
+        </label>
+        <ul id="navbarlist">
+            <li><a href="/">Home</a></li>
+            <li><a href="{% url 'categories' %}">Menu</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="{% url 'orders' %}">Order</a></li>           
+            <li><a href="{% url 'booktable' %}" class="bookbutton">Book a Table</a></li>
+        </ul>
+    </div>
+    <div class="navicon">
+       <a href="{% url 'cart' %}"><i class="fa-solid fa-cart-arrow-down"></i></a><span><sup style="color:white; background-color:orange; padding:5px; border-radius:20px;">{{cartitems}}</sup></span>
+       <a href="#"><i class="fa-solid fa-user profile" class="user-img" onclick="toggleMenu()"></i></a>
+    </div>
+
+    <!-- profile -->
+
+    <div class="sub-menu-wrap" id="subMenu">
+        <div class="sub-menu" >
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'profile' %}" class="sub-menu-link">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <p>Profile</p>
+                <span><i class="fa-solid fa-caret-right" style="color: #ffae3d;"></i></span>
+            </a>
+            <a href="{% url 'logout' %}" class="sub-menu-link">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <p>Log Out</p>
+                <span><i class="fa-solid fa-caret-right" style="color: #ffae3d;"></i></span>
+            </a>
+        {% else %}
+            <a href="{% url 'loginpw' %}" class="sub-menu-link">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <p>Login</p>
+                <span><i class="fa-solid fa-caret-right" style="color: #ffae3d;"></i></span>
+            </a>
+            <a href="{% url 'register' %}" class="sub-menu-link">
+                <i class="fa-solid fa-address-card"></i>
+                <p>Register</p>
+                <span><i class="fa-solid fa-caret-right" style="color: #ffae3d;"></i></span>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</nav>

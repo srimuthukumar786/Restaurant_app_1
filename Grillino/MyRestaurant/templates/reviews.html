@@ -1,0 +1,67 @@
+{% extends "binding.html" %}
+{% load static %}
+{% block title %}
+Review
+{% endblock title %}
+
+{% block content %}
+
+<div class="container ">
+    <h1 class="text-center">Customer Reviews</h1>
+
+    <div class="review-form">
+        <h3>Leave a Review</h3>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Your Name</label>
+                <input type="text" class="form-control" id="name" value="{{ request.user.first_name }}" disabled>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Select Product</label>
+                <select class="form-select" name="about" required>
+                    <option value="Overall Dishes">Overall Dishes</option>
+                    <!-- Loop through the products to generate options -->
+                    {% for product in products %}
+                        <option value="{{ product.name }}">{{ product.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="review">
+                <label for="">Give your ratings</label>
+                <div class="stars" id="starContainer">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <!-- Hidden input to store the rating value -->
+                <input type="hidden" name="rating" id="ratingValue" value="">
+            </div>
+            <div class="mb-3">
+                <label for="reviewText" class="form-label">Your Review</label>
+                <textarea class="form-control" name='reviewText' id="reviewText" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary my-2">Submit Review</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const stars = document.querySelectorAll('.star');
+    const ratingValueInput = document.getElementById('ratingValue');
+
+    stars.forEach((star, index) => {
+        star.addEventListener('click', () => {
+            stars.forEach(s => s.classList.remove('selected'));
+            for (let i = 0; i <= index; i++) {
+                stars[i].classList.add('selected');
+            }
+            // Set the value of the hidden input field based on the clicked star
+            ratingValueInput.value = index + 1;
+        });
+    });
+</script>
+
+{% endblock content %}

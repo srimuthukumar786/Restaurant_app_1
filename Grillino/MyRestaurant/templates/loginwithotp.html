@@ -1,0 +1,36 @@
+{% extends "binding.html" %}
+{% load static %}
+{% block title %}
+Login with OTP
+{% endblock title %}
+{% block content %}
+<section class="logincontainer">
+    <div class="container-fluid align-items-center ">
+        <div class="row row-cols-1 row-cols-md-2 text-center m-5">
+            <div>
+                <div class="col">
+                    <div class="loginlogo p-2 p-md-5 bg-light">
+                        <img src="{% static 'images/logo.svg' %}" alt="" class="img-fluid">
+                    <img src="{% static 'images/subscribe-bg-1-2.jpg' %}" alt="" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col">
+                    <div class="login p-2 p-md-5">
+                        <h1>Login with OTP</h1>
+                    <form class="otplogin" method='POST'>
+                        {% csrf_token %}
+                        <div class="">
+                        <input type="email" name='email' placeholder="Enter Your email" id="useremail"><br>
+                        <span id="useremailerror"></span><br>
+                        </div>
+                        <button type="submit">Generate OTP</button>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   </section>
+{% endblock content %}

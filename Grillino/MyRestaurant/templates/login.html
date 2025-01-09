@@ -1,0 +1,49 @@
+{% extends "binding.html" %}
+{% load static %}
+{% block title %}
+Login
+{% endblock title %}
+{% block content %}
+<section class="logincontainer">
+    <div class="container-fluid align-items-center ">
+        <div class="row row-cols-1 row-cols-md-2 text-center m-5">
+            <div>
+                <div class="col">
+                    <div class="loginlogo p-2 p-md-5 bg-light">
+                        <img src="{% static 'images/logo.svg' %}" alt="" class="img-fluid">
+                    <img src="{% static 'images/subscribe-bg-1-2.jpg' %}" alt="" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col">
+                    <div class="login p-2 p-md-5">
+                        <h1>Login form</h1>
+                    <form class="form1" onsubmit="login()" method='POST'>
+                        {% csrf_token %}
+                        <label for="">Email </label><br>
+                        <input type="email" name='email' placeholder="Enter You email" id="useremail"><br>
+                        <span id="useremailerror"></span><br>
+                        <label for="" id="">Password </label><br>
+                        <input type="password" name='password' placeholder="Password" id="userpassword"><br>
+                        <span id="userpassworderror"></span><br>
+                        <a href="#">Forgot Password ?</a><br>
+                        <div>
+                            <button type="submit" id="loginbutton">Login</button>
+                        </div>
+                        <div>
+                            <button type="submit" id="otpbutton"><a href="{% url 'loginwithotp' %}">Login With OTP</a></button>
+                        </div>
+                        <div class="reg">
+                            <p>Don't have an account?<a href="{% url 'register'%}">Register</a></p>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   </section>
+    
+
+{% endblock content %}

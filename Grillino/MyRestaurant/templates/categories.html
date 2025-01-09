@@ -1,0 +1,28 @@
+{% extends "binding.html" %}
+{% load static %}
+{% block title %}
+Categories
+{% endblock title %}
+
+{% block content %}
+<section>
+    <h1 class="text-center mt-3 mb-3">Categories</h1>
+    <div class="container categories">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 text-center item  g-4 mb-5">
+                {% for item in data %}
+               <div>
+                <div class="col category">
+                    <a href="{% url 'products' item.name %}"><img src="{{item.Imageurl}}" alt="" class="img-fluid mt-3 mt-md-0"></a>
+                    <div class="categorytext mt-4">
+                        <h4>{{item.name}}</h4>
+                        <p>{{item.description}}</p>
+                    </div>
+                </div>
+               </div>
+                {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+

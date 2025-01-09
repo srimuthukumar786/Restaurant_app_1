@@ -1,0 +1,67 @@
+{% extends "binding.html" %}
+{% load static %}
+{% block title %}
+Products
+{% endblock title %}
+
+{% block content %}
+<!-- Sorting form -->
+<form action="" method="POST" id="sortForm">
+    {% csrf_token %}
+    <select name="sort" id="sortDropdown" style="float:right; margin-top:10px; margin-right:20px;">
+        <option value="">- Sort by -</option>
+        <option value="low_to_high" {% if request.POST.sort == 'low_to_high' %}selected{% endif %}>Price: low-to-high</option>
+        <option value="high_to_low" {% if request.POST.sort == 'high_to_low' %}selected{% endif %}>Price: high-to-low</option>
+    </select>
+</form>
+<section>
+    <h1 class="text-center mt-3 mb-3">{{cname}}</h1>
+    <div class="container categories">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 text-center item  g-4 mb-5">
+                {% for item in data %}
+               <div>
+                <div class="col category" data-bs-toggle='modal' data-bs-target='#{{item.id}}'>
+                    <img src="{{item.Imageurl}}" alt="" class="img-fluid mt-3 mt-md-0">
+                    <div class="categorytext mt-4">
+                        <h4>{{item.name}}</h4>
+                        <h4 style='color:orange;'>&#8377;{{item.selling_price | floatformat:0}}</h4>
+                    </div>
+                </div>
+               </div>
+               <div class="modal" id="{{item.id}}">
+                <div class="modal-dialog modal-fullscreen p-2 p-md-5">
+                    <div class="modal-content container">
+                        <div class="modal-header">
+                            <h3>Grillino</h3>
+                            <button type="button" class="btn btn-outline-danger " data-bs-dismiss="modal">X</button>
+                        </div>
+                        <div class="modal-body row row-cols-1 row-cols-md-2">
+                           <div class="col">
+                            <img src="{{item.Imageurl}}" style="height:400px; width:100%" alt="" class="img-fluid">
+                           </div>
+                            <div class="modal-text ps-3 col">
+                                <h2>{{item.name}}</h2>
+                                <div class="ingredients">
+                                    <p>{{item.description}}</p>
+                                </div>
+                                <h4>Price : ₹ {{item.selling_price}}</h4> 
+                                <button class="btn btn-primary update-cart" id="btnCart" data-product="{{item.id}}" data-action="add"><i class="fa fa-shopping-cart"></i> Add to Cart</button>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- JavaScript to auto-submit the form when the dropdown value changes -->
+<script>
+    document.getElementById('sortDropdown').addEventListener('change', function() {
+        document.getElementById('sortForm').submit();
+    });
+</script>
+
+{% endblock content %}
+

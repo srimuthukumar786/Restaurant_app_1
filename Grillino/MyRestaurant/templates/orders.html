@@ -1,0 +1,28 @@
+{% extends 'binding.html' %}
+{% block title %}
+Cart
+{% endblock title %}
+
+{% block content %}
+<a href="{% url 'reviews' %}" class="btn btn-warning text-white checkbtn" style="float:right; margin-top:10px;margin-right:20px;">Feedback</a>
+<div class="container-fluid" style="margin-top:100px;">
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-3"><strong>Name</strong></div>
+        <div class="col-lg-2"><strong>Price</strong></div>
+        <div class="col-lg-2"><strong>Quantity</strong></div>
+        <div class="col-lg-2"><strong>Total</strong></div>
+    </div>
+    <hr>
+    {% for item in items %} 
+    <div class="row product-row">
+        <div class="col-lg-3"><img src="{{ item.product.Imageurl }}" style="height:120px;width:150px;" alt=""></div>
+        <div class="col-lg-3">{{ item.product.name }}</div>
+        <div class="col-lg-2">${{ item.product.selling_price }}</div>
+        <div class="col-lg-2">{{ item.quantity }}</div>
+        <div class="col-lg-2">${{ item.get_total }}</div>
+    </div>
+    <hr>
+ {% endfor %}
+</div>
+{% endblock content %}

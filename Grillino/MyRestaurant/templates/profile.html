@@ -1,0 +1,112 @@
+{% extends 'binding.html' %}
+{% load static %}
+{% block title %}
+Book a Table
+{% endblock title %}
+
+{% block content %}
+
+<section>
+    <div class="container-fluid profilepageform">
+        <div class="row row-cols-1 row-cols-lg-2 p-5 justify-content-center align-items-center">
+            <div class="col ">
+                <div>
+                    <img src="{% static 'images/profile.jpeg' %}" alt="" class="img-fluid">   
+                </div>
+            </div>
+            <div class="col text-center">
+                <form method='POST' action="{% url 'profile_page' profile.id %}">
+                    {% csrf_token %}
+                  <div class="text-center ">
+                    <div>
+                        <label for="">First Name : </label><br>
+                        <input type="text" name='fname' id="name" placeholder="First Name" value='{{profile.first_name}}'>
+                    </div>
+                    <div>
+                        <label for="">Last Name : </label><br>
+                        <input type="text" name='lname' id="name2" placeholder="Last Name" value='{{profile.last_name}}'>
+                    </div>
+                    <div>
+                        <label for="">Email : </label><br>
+                        <input type="email" id="email" placeholder="Email" value='{{profile.email}}' disabled>
+                    </div>
+                    <div>
+                        <label for="">Phone : </label><br>
+                        <input type="number" name='phone' id="phone" placeholder="Enter your Number" value='{{profile.mobile}}'>
+                    </div>
+                    <div>
+                        <label for="">Address : </label><br>
+                        <input type="text" id="address" name='address' placeholder="Enter your Adderss" value='{{profile.address}}'>
+                    </div>
+                    <div>
+                        <label for="">City : </label><br>
+                        <input type="text" id="city" name='city' placeholder="Enter city" value='{{profile.city}}'>
+                    </div>
+                    <div>
+                        <label for="">State : </label><br>
+                        <input list="states" name="state" placeholder="Select State" required value='{{profile.state}}'>
+                        <datalist id="states">
+                            <option value="Andhra Pradesh">
+                            <option value="Arunachal Pradesh">
+                            <option value="Assam">
+                            <option value="Bihar">
+                            <option value="Chhattisgarh">
+                            <option value="Goa">
+                            <option value="Gujarat">
+                            <option value="Haryana">
+                            <option value="Himachal Pradesh">
+                            <option value="Jharkhand">
+                            <option value="Karnataka">
+                            <option value="Kerala">
+                            <option value="Madhya Pradesh">
+                            <option value="Maharashtra">
+                            <option value="Manipur">
+                            <option value="Meghalaya">
+                            <option value="Mizoram">
+                            <option value="Nagaland">
+                            <option value="Odisha">
+                            <option value="Punjab">
+                            <option value="Rajasthan">
+                            <option value="Sikkim">
+                            <option value="Tamil Nadu">
+                            <option value="Telangana">
+                            <option value="Tripura">
+                            <option value="Uttar Pradesh">
+                            <option value="Uttarakhand">
+                            <option value="West Bengal">
+                            <option value="Andaman and Nicobar Islands">
+                            <option value="Chandigarh">
+                            <option value="Dadra and Nagar Haveli and Daman and Diu">
+                            <option value="Lakshadweep">
+                            <option value="Delhi">
+                            <option value="Puducherry">
+                        </datalist>                        
+                    </div>
+                    <div>
+                        <label for="">Pin Code : </label><br>
+                        <input type="number" name='pincode' id="pincode" placeholder="Enter your Pincode" value='{{profile.pincode}}'>
+                    </div>
+                    <div class="registerbutton">
+                        <button type="submit" class="regsubmit">Update</button>
+                        <button type="button" class="regback mt-3 mt-md-0"><a href="/">Back</a></button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+        </div>
+    </div>
+</section>
+
+{% if success_message %}
+    <script type="text/javascript">
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '{{ success_message }}',  // Display the success message passed from the view
+            showConfirmButton: false,
+            timer: 3000
+        });
+    </script>
+    {% endif %}
+
+{% endblock content %}

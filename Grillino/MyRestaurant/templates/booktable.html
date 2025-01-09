@@ -1,0 +1,57 @@
+{% extends 'binding.html' %}
+{% load static %}
+{% block title %}
+Book a Table
+{% endblock title %}
+
+{% block content %}
+<div class="contaoner booktable p-5">
+    <div class="row row-cols-1 row-cols-md-2">
+        <div class="col pb-5">
+            <img src="{% static 'images/hero-img-6-2.png' %}" alt="" class="img-fluid">
+        </div>
+        <div class="col text-center">
+            <form action="" class="bookingform" method='POST' onsubmit="return booktable()">
+                {% csrf_token %}
+                <h2 class="">Book your Table</h2>
+              <div class=" ">
+                <div>
+                    <label for="">First Name : </label><br>
+                    <input type="text" id="tableName" name='fname' placeholder="First Name"><br>
+                    <span id="tableNameError"></span>
+                </div>
+                <div>
+                    <label for="">Last Name : </label><br>
+                    <input type="text" id="tableName2" name='lname' placeholder="Last Name"><br>
+                    <span id="tableNameError2"></span>
+                </div>
+                <div>
+                    <label for="">Email : </label><br>
+                    <input type="email" id="tableEmail" name='email' placeholder="Email"><br>
+                    <span id="tableEmailError"></span>
+                </div>
+                <div>
+                    <label for="">Phone Number : </label><br>
+                    <input type="Phone" id="phonenumber" name='phone' placeholder="Enter Your Number"><br>
+                    <span id="phonenumberError"></span>
+                </div>
+                 <div>
+                    <label for="">Date & Time : </label><br>
+                    <input type="datetime-local" name="date" id="date"><br>
+                    <span id="dateError"></span>
+                </div>
+                <div>
+                    <label for="">No. of Person </label><br>
+                    <input type="Number" name="count" id="count" placeholder="Enter Your Number of Person"><br>
+                    <span id="dateError"></span>
+                </div><br>
+                <div>
+                    <button type="submit" class="regsubmit">Submit</button>
+                </div>
+              </div>
+            </form>
+             
+        </div>
+    </div>
+</div>
+{% endblock content %}
